@@ -1,23 +1,29 @@
 from rest_framework import viewsets
 from .models import (
     Especialidad,
-    Ubicacion,
     Paciente,
     Medico,
     ConsultaMedica,
     Tratamiento,
     Medicamento,
     RecetaMedica,
+    Seguro, # NUEVO
+    Horario, # NUEVO
+    CitaMedica, # NUEVO
+    HistorialClinico, # NUEVO
 )
 from .serializer import (
     EspecialidadSerializer,
-    UbicacionSerializer,
     PacienteSerializer,
     MedicoSerializer,
     ConsultaMedicaSerializer,
     TratamientoSerializer,
     MedicamentoSerializer,
     RecetaMedicaSerializer,
+    SeguroSerializer, # NUEVO
+    HorarioSerializer, # NUEVO
+    CitaMedicaSerializer, # NUEVO
+    HistorialClinicoSerializer, # NUEVO
 )
 
 # ======================================================================
@@ -33,10 +39,6 @@ class EspecialidadViewSet(viewsets.ModelViewSet):
     # Serializer: Define cómo se serializan los datos
     serializer_class = EspecialidadSerializer
 
-class UbicacionViewSet(viewsets.ModelViewSet):
-    """ ViewSet para la nueva entidad Ubicacion. """
-    queryset = Ubicacion.objects.all()
-    serializer_class = UbicacionSerializer
 
 class PacienteViewSet(viewsets.ModelViewSet):
     """ ViewSet para la entidad Paciente. """
@@ -88,3 +90,46 @@ class RecetaMedicaViewSet(viewsets.ModelViewSet):
     """
     queryset = RecetaMedica.objects.all()
     serializer_class = RecetaMedicaSerializer
+
+
+# ======================================================================
+# VIEWSETS PARA NUEVAS TABLAS ADICIONALES
+# ======================================================================
+
+class SeguroViewSet(viewsets.ModelViewSet):
+    """ ViewSet para la nueva entidad Seguro. """
+    queryset = Seguro.objects.select_related('paciente').all()
+    serializer_class = SeguroSerializer
+    
+    # Permite filtrar por paciente y buscar por aseguradora
+    filterset_fields = ['paciente', 'activo', 'tipo_cobertura']
+    search_fields = ['nombre_aseguradora', 'numero_poliza']
+
+
+class HorarioViewSet(viewsets.ModelViewSet):
+    """ ViewSet para la nueva entidad Horario. """
+    queryset = Horario.objects.select_related('medico').all()
+    serializer_class = HorarioSerializer
+    
+    # Permite filtrar por médico y día de la semana
+    filterset_fields = ['medico', 'dia_semana', 'activo']
+
+
+class CitaMedicaViewSet(viewsets.ModelViewSet):
+    """ ViewSet para la nueva entidad CitaMedica. """
+    queryset = CitaMedica.objects.select_related('paciente', 'medico', 'consulta_realizada').all()
+    serializer_class = CitaMedicaSerializer
+    
+    # Permite filtrar por médico, paciente y estado
+    filterset_fields = ['medico', 'paciente', 'estado']
+    search_fields = ['paciente__rut', 'paciente__nombre', 'medico__rut']
+
+
+class HistorialClinicoViewSet(viewsets.ModelViewSet):
+    """ ViewSet para la nueva entidad HistorialClinico. """
+    queryset = HistorialClinico.objects.select_related('paciente', 'registrado_por').all()
+    serializer_class = HistorialClinicoSerializer
+    
+    # Permite filtrar por paciente y buscar por tipo de registro
+    filterset_fields = ['paciente', 'registrado_por', 'tipo_registro']
+    search_fields = ['tipo_registro', 'descripcion']

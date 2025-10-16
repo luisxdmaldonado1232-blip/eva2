@@ -1,0 +1,25 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      {% for h in headers %}
+      <th>{{ h }}</th>
+      {% endfor %}
+      <th class="text-end">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for obj in items %}
+    <tr>
+      {% for f in fields %}
+      <td>{{ obj|attr:f }}</td>
+      {% endfor %}
+      <td class="text-end">
+        <a href="{{ obj.pk }}/editar/" class="btn btn-sm btn-primary">Editar</a>
+        <a href="{{ obj.pk }}/eliminar/" class="btn btn-sm btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="99" class="text-center text-muted">Sin datos</td></tr>
+    {% endfor %}
+  </tbody>
+</table>

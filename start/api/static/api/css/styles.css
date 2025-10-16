@@ -1,0 +1,12 @@
+/* Global simple styles for HTML views */
+body { background-color: #f7f7f9; }
+.navbar { font-weight: 500; }
+.container { padding-bottom: 40px; }
+.card { border-radius: 10px; }
+.table td, .table th { vertical-align: middle; }
+.btn { border-radius: 8px; }
+form .helptext { color: #6c757d; font-size: 0.875rem; }
+.form-errors { background: #fff3f3; border: 1px solid #f5c2c7; color: #a33; padding: 12px; border-radius: 8px; }
+.page-title { display:flex; align-items:center; justify-content:space-between; gap: 12px; }
+.page-title h2 { margin: 0; }
+.content-card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }

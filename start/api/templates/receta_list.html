@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Recetas{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Recetas</h2>
+  <a href="{% url 'receta_create' %}" class="btn btn-success">Nueva receta</a>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Tratamiento</th>
+      <th>Medicamento</th>
+      <th>Dosis</th>
+      <th>Vía</th>
+      <th class="text-end">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for obj in items %}
+    <tr>
+      <td>{{ obj.id }}</td>
+      <td>{{ obj.tratamiento.id }}</td>
+      <td>{{ obj.medicamento.nombre }}</td>
+      <td>{{ obj.dosis }}</td>
+      <td>{{ obj.get_via_administracion_display }}</td>
+      <td class="text-end">
+        <a href="{% url 'receta_update' obj.pk %}" class="btn btn-sm btn-primary">Editar</a>
+        <a href="{% url 'receta_delete' obj.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6" class="text-center text-muted">Sin datos</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
