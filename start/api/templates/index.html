@@ -1,8 +1,80 @@
 {% extends 'base.html' %}
 {% block title %}Inicio{% endblock %}
 {% block content %}
-<div class="p-5 bg-light rounded-3">
-  <h1 class="display-6">Panel de gestión clínica</h1>
-  <p class="lead">CRUD HTML (fuera del admin) para las entidades principales.</p>
+<div class="p-5 bg-light rounded-3 mb-4">
+  <h1 class="display-5">Panel de gestión clínica</h1>
+  <p class="lead">Bienvenido al sistema. Selecciona una sección para gestionar los datos de la clínica.</p>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <a href="{% url 'especialidad_list' %}" class="text-decoration-none">
+      <div class="card h-100 shadow-sm border-primary">
+        <div class="card-body">
+          <h5 class="card-title">Especialidades</h5>
+          <p class="card-text">Ver y administrar especialidades médicas.</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a href="{% url 'paciente_list' %}" class="text-decoration-none">
+      <div class="card h-100 shadow-sm border-success">
+        <div class="card-body">
+          <h5 class="card-title">Pacientes</h5>
+          <p class="card-text">Ver y administrar pacientes registrados.</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a href="{% url 'medico_list' %}" class="text-decoration-none">
+      <div class="card h-100 shadow-sm border-info">
+        <div class="card-body">
+          <h5 class="card-title">Médicos</h5>
+          <p class="card-text">Ver y administrar médicos de la clínica.</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a href="{% url 'consulta_list' %}" class="text-decoration-none">
+      <div class="card h-100 shadow-sm border-warning">
+        <div class="card-body">
+          <h5 class="card-title">Consultas</h5>
+          <p class="card-text">Ver y administrar consultas médicas.</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a href="{% url 'tratamiento_list' %}" class="text-decoration-none">
+      <div class="card h-100 shadow-sm border-danger">
+        <div class="card-body">
+          <h5 class="card-title">Tratamientos</h5>
+          <p class="card-text">Ver y administrar tratamientos médicos.</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a href="{% url 'medicamento_list' %}" class="text-decoration-none">
+      <div class="card h-100 shadow-sm border-secondary">
+        <div class="card-body">
+          <h5 class="card-title">Medicamentos</h5>
+          <p class="card-text">Ver y administrar medicamentos disponibles.</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col">
+    <a href="{% url 'receta_list' %}" class="text-decoration-none">
+      <div class="card h-100 shadow-sm border-dark">
+        <div class="card-body">
+          <h5 class="card-title">Recetas</h5>
+          <p class="card-text">Ver y administrar recetas médicas.</p>
+        </div>
+      </div>
+    </a>
+  </div>
 </div>
 {% endblock %}

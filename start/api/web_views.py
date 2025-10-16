@@ -54,38 +54,38 @@ class PacienteListView(ListView):
     context_object_name = "items"
 
 
+
+from django import forms
+
+class PacienteForm(forms.ModelForm):
+    class Meta:
+        model = Paciente
+        fields = [
+            "rut",
+            "nombre",
+            "apellido",
+            "fecha_nacimiento",
+            "genero",
+            "tipo_sangre",
+            "correo",
+            "telefono",
+            "direccion",
+            "activo",
+        ]
+        widgets = {
+            'fecha_nacimiento': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+        }
+
 class PacienteCreateView(CreateView):
     model = Paciente
-    fields = [
-        "rut",
-        "nombre",
-        "apellido",
-        "fecha_nacimiento",
-        "genero",
-        "tipo_sangre",
-        "correo",
-        "telefono",
-        "direccion",
-        "activo",
-    ]
+    form_class = PacienteForm
     template_name = "paciente_form.html"
     success_url = reverse_lazy("paciente_list")
 
 
 class PacienteUpdateView(UpdateView):
     model = Paciente
-    fields = [
-        "rut",
-        "nombre",
-        "apellido",
-        "fecha_nacimiento",
-        "genero",
-        "tipo_sangre",
-        "correo",
-        "telefono",
-        "direccion",
-        "activo",
-    ]
+    form_class = PacienteForm
     template_name = "paciente_form.html"
     success_url = reverse_lazy("paciente_list")
 
